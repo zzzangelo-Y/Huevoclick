@@ -1,28 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JUEGO DE CLICK</title>
+    <title>Huevo Clicker | By Angelo Dev</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
     <div class="contenedor">
         <div class="juego">
             <h1>Haz click en el huevo</h1>
-            <img id="huevo"
-                src="https://static.vecteezy.com/system/resources/previews/025/377/474/non_2x/chicken-egg-cartoon-vector.jpg"
-                alt="">
-            <h2 id="contador"></h2>
+            <img id="huevo" src="https://static.vecteezy.com/system/resources/previews/025/377/474/non_2x/chicken-egg-cartoon-vector.jpg" alt="Huevo para clickear">
+            <h2 id="contador">¡Comienza a clickear!</h2>
         </div>
         <div class="mensaje">
-            <h1>Desafio</h1>
-            <p>Da click 100 veces</p>
+            <h1>Desafío</h1>
+            <p>¿Puedes hacer click 100 veces?</p>
+            <div class="progress-container">
+                <div id="progress-bar" class="progress-bar"></div>
+            </div>
         </div>
     </div>
+    <footer class="copyright">
+        <p>Desarrollado por <a href="https://github.com/zzzangelo-Y" target="_blank">Angelo Dev</a></p>
+        <p class="year">© 2024</p>
+    </footer>
     <script src="main.js"></script>
 </body>
-
 </html>

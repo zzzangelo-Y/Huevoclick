@@ -5,56 +5,68 @@
 }
 
 body {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #1a1c20 0%, #2d3436 100%);
     min-height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
+    color: #ffffff;
+    position: relative;
 }
 
 .contenedor {
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
     border-radius: 20px;
     padding: 2rem;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    border: 1px solid rgba(255, 255, 255, 0.18);
     display: flex;
-    gap: 2rem;
-    max-width: 1000px;
+    gap: 3rem;
+    max-width: 900px;
     width: 90%;
+    margin: 2rem;
 }
 
 .juego {
     flex: 2;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .mensaje {
     flex: 1;
-    background-color: #f8f9fa;
+    background-color: rgba(255, 255, 255, 0.05);
     padding: 1.5rem;
     border-radius: 15px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 1rem;
+    gap: 1.5rem;
     text-align: center;
 }
 
 h1 {
-    color: #2c3e50;
+    color: #ffffff;
     margin-bottom: 1.5rem;
     font-size: 2rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 h2 {
-    color: #e74c3c;
-    font-size: 2.5rem;
-    margin-top: 1rem;
+    color: #00ff88;
+    font-size: 1.8rem;
+    margin-top: 1.5rem;
+    font-weight: 600;
 }
 
 p {
-    color: #34495e;
+    color: #ffffff;
     font-size: 1.2rem;
     line-height: 1.6;
 }
@@ -63,15 +75,78 @@ p {
     width: 200px;
     height: 200px;
     cursor: pointer;
-    transition: transform 0.2s;
+    transition: all 0.3s ease;
+    border-radius: 50%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    user-select: none;
+    -webkit-user-drag: none;
 }
 
 #huevo:hover {
     transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
 }
 
 #huevo:active {
     transform: scale(0.95);
+}
+
+.progress-container {
+    width: 100%;
+    height: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 1rem;
+}
+
+.progress-bar {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #00ff88 0%, #00ffcc 100%);
+    transition: width 0.3s ease;
+}
+
+.copyright {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+}
+
+.copyright p {
+    font-size: 0.9rem;
+    color: #ffffff;
+    margin: 0.2rem 0;
+}
+
+.copyright a {
+    color: #00ff88;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.copyright a:hover {
+    color: #00ffcc;
+}
+
+.year {
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+/* Animaciones */
+@keyframes bounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.celebrate {
+    animation: bounce 0.5s ease infinite;
 }
 
 /* Media Queries */
@@ -79,7 +154,7 @@ p {
     .contenedor {
         flex-direction: column;
         padding: 1.5rem;
-        gap: 1.5rem;
+        gap: 2rem;
     }
 
     .juego, .mensaje {
@@ -99,17 +174,16 @@ p {
 @media (max-width: 480px) {
     .contenedor {
         padding: 1rem;
-        gap: 1rem;
-        width: 95%;
+        margin: 1rem;
+        gap: 1.5rem;
     }
 
     h1 {
         font-size: 1.2rem;
-        margin-bottom: 1rem;
     }
 
     h2 {
-        font-size: 2rem;
+        font-size: 1.5rem;
     }
 
     p {
@@ -120,15 +194,8 @@ p {
         width: 120px;
         height: 120px;
     }
-}
 
-/* Animaciones */
-@keyframes bounce {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
-}
-
-.celebrate {
-    animation: bounce 0.5s ease;
+    .copyright {
+        padding: 0.5rem;
+    }
 }
