@@ -67,5 +67,5 @@ huevo.addEventListener('click', () => {
     }
 });
 
-// Inicializar el juego
+// Inicializar el juego xd
 reiniciarJuego();
