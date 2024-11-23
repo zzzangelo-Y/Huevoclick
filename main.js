@@ -1,87 +1,71 @@
 const huevo = document.querySelector("#huevo");
 const contador = document.querySelector("#contador");
+const temporizador = document.querySelector("#temporizador");
+const progressBar = document.querySelector("#progress-bar");
 const META_CLICKS = 100;
 
 let contadorClicks = 0;
-let juegoActivo = true;
+let juegoActivo = false;
+let tiempoInicio;
+let intervalId;
 
+function actualizarTemporizador() {
+    if (!juegoActivo) return;
+    
+    const tiempoActual = new Date().getTime();
+    const tiempoTranscurrido = Math.floor((tiempoActual - tiempoInicio) / 1000);
+    const minutos = Math.floor(tiempoTranscurrido / 60);
+    const segundos = tiempoTranscurrido % 60;
+    
+    temporizador.textContent = `Tiempo: ${minutos}:${segundos.toString().padStart(2, '0')}`;
+}
 
 function actualizarContador(numero) {
     contador.textContent = `¡Has hecho click ${numero} ${numero === 1 ? 'vez' : 'veces'}!`;
-    contador.classList.add('actualizar');
-    setTimeout(() => contador.classList.remove('actualizar'), 200);
+    
+    // Actualizar la barra de progreso
+    const progreso = (numero / META_CLICKS) * 100;
+    progressBar.style.width = `${progreso}%`;
 }
-
 
 function reiniciarJuego() {
     contadorClicks = 0;
-    juegoActivo = true;
-    huevo.src = "https://static.vecteezy.com/system/resources/previews/025/377/474/non_2x/chicken-egg-cartoon-vector.jpg";
-    contador.textContent = "¡Comienza de nuevo!";
-    huevo.classList.remove('completado');
+    juegoActivo = false;
+    clearInterval(intervalId);
+    huevo.classList.remove('celebrate');
+    temporizador.textContent = 'Tiempo: 0:00';
+    contador.textContent = "¡Comienza a clickear!";
+    progressBar.style.width = '0%';
 }
-
 
 function completarJuego() {
     juegoActivo = false;
-    huevo.classList.add('completado');
-    contador.textContent = "Ya lo rompiste p";
-    
-    
-    huevo.src = "chicken-egg-cartoon-vector.png";
-    
+    clearInterval(intervalId);
+    huevo.classList.add('celebrate');
+    contador.textContent = "¡Lo lograste! El huevo se rompió";
     
     setTimeout(() => {
         reiniciarJuego();
     }, 3000);
 }
 
-
 huevo.addEventListener('click', () => {
-    if (!juegoActivo) return;
+    if (!juegoActivo) {
+        juegoActivo = true;
+        tiempoInicio = new Date().getTime();
+        intervalId = setInterval(actualizarTemporizador, 100);
+    }
 
     contadorClicks++;
     huevo.classList.add('click');
-    
-   
     setTimeout(() => huevo.classList.remove('click'), 200);
-
     
     actualizarContador(contadorClicks);
 
-    
     if (contadorClicks >= META_CLICKS) {
         completarJuego();
     }
 });
 
-
-const styles = `
-    .click {
-        transform: scale(0.95);
-        transition: transform 0.1s;
-    }
-
-    .completado {
-        animation: victoria 0.5s infinite alternate;
-    }
-
-    .actualizar {
-        animation: aparecer 0.2s ease-out;
-    }
-
-    @keyframes victoria {
-        from { transform: scale(1); }
-        to { transform: scale(1.1); }
-    }
-
-    @keyframes aparecer {
-        from { transform: scale(1.1); opacity: 0.7; }
-        to { transform: scale(1); opacity: 1; }
-    }
-`;
-
-// Agregar los estilos al documento
-const styleSheet = document.createElement("style");
-styleSheet.textContent = styles;
-document.head.appendChild(styleSheet);
+// Inicializar el juego
+reiniciarJuego();
